@@ -23,7 +23,7 @@ function addTodo(todo) {
     }
 
     if (todoText) {
-        const todoEl = document.createElement("li");
+        const todoE1 = document.createElement("li");
         if (todo && todo.completed) {
             todoE1.classList.add("completed");
         }
@@ -38,5 +38,24 @@ function addTodo(todo) {
             todoE1.remove();
             updateLS();
         });
+
+        todosUL.appendChild(todoE1);
+        input.value = "";
+        updateLS();
     }
+}
+
+function updateLS() {
+    const todosE1 = document.querySelectorAll("li");
+
+    const todos = [];
+
+    todosE1.forEach((todoe1) => {
+        todos.push({
+            text: todoE1.innerText;
+            completed: todoE1.classList.contains("completd"),
+        });
+    });
+
+    localStorage.setItem("todos", JSON.stringify(todos));
 }
