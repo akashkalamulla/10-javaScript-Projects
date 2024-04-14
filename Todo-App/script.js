@@ -22,5 +22,21 @@ function addTodo(todo) {
         todoText = todo.text;
     }
 
-    if (todoText)
+    if (todoText) {
+        const todoEl = document.createElement("li");
+        if (todo && todo.completed) {
+            todoE1.classList.add("completed");
+        }
+
+        todoE1.addEventListener("click", () => {
+            todoEl.classList.toggle("completed");
+            updateLS();
+        });
+
+        todoE1.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            todoE1.remove();
+            updateLS();
+        });
+    }
 }
