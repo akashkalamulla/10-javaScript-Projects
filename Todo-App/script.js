@@ -12,6 +12,7 @@ if (todos) {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
+
     addTodo();
 });
 
@@ -23,37 +24,44 @@ function addTodo(todo) {
     }
 
     if (todoText) {
-        const todoE1 = document.createElement("li");
+        const todoEl = document.createElement("li");
         if (todo && todo.completed) {
-            todoE1.classList.add("completed");
+            todoEl.classList.add("completed");
         }
 
-        todoE1.addEventListener("click", () => {
+        todoEl.innerText = todoText;
+
+        todoEl.addEventListener("click", () => {
             todoEl.classList.toggle("completed");
+
             updateLS();
         });
 
-        todoE1.addEventListener("contextmenu", (e) => {
+        todoEl.addEventListener("contextmenu", (e) => {
             e.preventDefault();
-            todoE1.remove();
+
+            todoEl.remove();
+
             updateLS();
         });
 
-        todosUL.appendChild(todoE1);
+        todosUL.appendChild(todoEl);
+
         input.value = "";
+
         updateLS();
     }
 }
 
 function updateLS() {
-    const todosE1 = document.querySelectorAll("li");
+    const todosEl = document.querySelectorAll("li");
 
     const todos = [];
 
-    todosE1.forEach((todoe1) => {
+    todosEl.forEach((todoEl) => {
         todos.push({
-            text: todoE1.innerText;
-            completed: todoE1.classList.contains("completd"),
+            text: todoEl.innerText,
+            completed: todoEl.classList.contains("completed"),
         });
     });
 
